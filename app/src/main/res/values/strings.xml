@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Quiz App</string>
+    <string name="welcome_message">Welcome to Samiha and Anurag&apos;s Quiz</string>
+    <string name="ok_button">OK</string>
 </resources>
