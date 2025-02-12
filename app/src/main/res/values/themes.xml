@@ -4,5 +4,6 @@
     <style name="Theme.QuizApp" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:colorPrimary">@color/garnet</item>
         <item name="android:statusBarColor">@color/garnet</item>
+        <item name="android:fontFamily">@font/irish_grover</item>
     </style>
 </resources>
