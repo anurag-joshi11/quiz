@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#8B1C1C"
-        android:text="Quiz of the Day"
+        android:text="@string/header_message"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:gravity="center"
@@ -22,12 +22,10 @@
     <LinearLayout
         android:id="@+id/scoreContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_height="match_parent"
         android:layout_below="@id/tvTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvScoreLabel"
@@ -35,27 +33,25 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/irish_grover"
             android:gravity="center"
-            android:text="Last Game’s\nScore: 0"
+            android:text="@string/last_game_score_text"
             android:textColor="#8B1C1C"
             android:textSize="22sp"
             android:textStyle="bold" />
 
 
-    <!-- Back Button -->
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="250dp"
-        android:layout_height="62dp"
-        android:fontFamily="@font/irish_grover"
-        android:backgroundTint="#8B1C1C"
-        android:text="@string/back_button"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/scoreContainer"
-        android:layout_marginTop="50dp" />
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="250dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#8B1C1C"
+            android:fontFamily="@font/irish_grover"
+            android:text="@string/back_button"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
 
     </LinearLayout>
-
 
 </RelativeLayout>
