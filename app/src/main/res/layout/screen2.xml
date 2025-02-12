@@ -9,20 +9,7 @@
 
     <!-- Header Section at the Top -->
 
-
     <!-- Title -->
-   <!-- <TextView
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:background="#8B1C1C"
-        android:text="@string/header_message"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:padding="12dp"
-        android:textStyle="bold" /> -->
-
-    <!-- Play Button -->
 
     <TextView
         android:id="@+id/headerText"
@@ -45,6 +32,8 @@
         android:orientation="vertical"
         android:gravity="center"
         android:layout_below="@id/headerText">>
+
+        <!--PLAY button-->
         <Button
             android:id="@+id/btnPlay"
             android:layout_width="250dp"
@@ -52,7 +41,7 @@
             android:layout_marginTop="50dp"
             android:backgroundTint="#8B1C1C"
             android:fontFamily="@font/irish_grover"
-            android:text="Play"
+            android:text="@string/play_button"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
@@ -64,7 +53,7 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="#E0E0E0"
             android:fontFamily="@font/irish_grover"
-            android:text="Show Score"
+            android:text="@string/show_score_button"
             android:textColor="#8B1C1C"
             android:textSize="18sp" />
 
@@ -76,7 +65,7 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="#8B1C1C"
             android:fontFamily="@font/irish_grover"
-            android:text="Back"
+            android:text="@string/back_button"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
     </LinearLayout>
