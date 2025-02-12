@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@android:color/white">
+
+
+    <!-- Header Section at the Top -->
+
+
+    <!-- Title -->
+   <!-- <TextView
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:background="#8B1C1C"
+        android:text="@string/header_message"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:textStyle="bold" /> -->
+
+    <!-- Play Button -->
+
+    <TextView
+        android:id="@+id/headerText"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/garnet"
+        android:fontFamily="@font/irish_grover"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/header_message"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
+
+    <!-- Main Content Layout -->
+    <LinearLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@id/headerText">>
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="250dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="#8B1C1C"
+            android:fontFamily="@font/irish_grover"
+            android:text="Play"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <!-- Show Score Button -->
+        <Button
+            android:id="@+id/btnShowScore"
+            android:layout_width="250dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#E0E0E0"
+            android:fontFamily="@font/irish_grover"
+            android:text="Show Score"
+            android:textColor="#8B1C1C"
+            android:textSize="18sp" />
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="250dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#8B1C1C"
+            android:fontFamily="@font/irish_grover"
+            android:text="Back"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>
