@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <!-- Title Bar -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8B1C1C"
+        android:text="Quiz of the Day"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:textStyle="bold" />
+
+    <!-- Results Header -->
+    <TextView
+        android:id="@+id/tvResultsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Results"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#8B1C1C"
+        android:gravity="center"
+        android:layout_below="@id/tvTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <!-- Results List -->
+    <ScrollView
+        android:id="@+id/scrollResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvResultsHeader"
+        android:layout_marginTop="10dp"
+        android:layout_above="@id/scoreContainer">
+
+        <LinearLayout
+            android:id="@+id/linearResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Sample Question and Answers (Dynamic Content) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q1: Quiz Question 1"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option A"
+                android:textSize="16sp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option B"
+                android:textSize="16sp"
+                android:textColor="#8B1C1C" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option C"
+                android:textSize="16sp"
+                android:textColor="#008000" />
+
+            <!-- More questions should be dynamically added in the activity -->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Score & OK Button Container -->
+    <LinearLayout
+        android:id="@+id/scoreContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp">
+
+        <!-- Score Display -->
+        <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score: 2"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:layout_marginBottom="10dp" />
+
+        <!-- OK Button -->
+        <Button
+            android:id="@+id/btnOK"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8B1C1C"
+            android:text="OK"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
