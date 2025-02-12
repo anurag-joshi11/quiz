@@ -6,4 +6,5 @@
     <string name="play_button">Play</string>
     <string name="show_score_button">Show Score</string>
     <string name="back_button">Back</string>
+    <string name="last_game_score_text">Last Game&apos;s Score: </string>
 </resources>
