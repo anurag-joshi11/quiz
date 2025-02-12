@@ -26,7 +26,7 @@
         android:layout_below="@id/tvTitle"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:background="#D3D3D3"
+        android:background="@color/grey"
         android:fontFamily="@font/irish_grover"
         android:padding="16dp">
 
@@ -60,7 +60,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#8B1C1C"
-            android:text="Option A"
+            android:text="@string/option_a"
             android:textColor="@android:color/white"
             android:fontFamily="@font/irish_grover"
             android:textSize="18sp"
@@ -72,7 +72,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#8B1C1C"
-            android:text="Option B"
+            android:text="@string/option_b"
             android:textColor="@android:color/white"
             android:fontFamily="@font/irish_grover"
             android:textSize="18sp"
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#8B1C1C"
             android:fontFamily="@font/irish_grover"
-            android:text="Option C"
+            android:text="@string/option_c"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
