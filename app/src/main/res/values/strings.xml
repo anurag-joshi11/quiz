@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Quiz App</string>
     <string name="header_message">Quiz of the Day</string>
-    <string name="welcome_message">Welcome to Samiha and Anurag&apos;s Quiz</string>
+    <string name="welcome_message">Welcome to Samiha and Anurag\'s Quiz</string>
     <string name="ok_button">OK</string>
     <string name="play_button">Play</string>
     <string name="show_score_button">Show Score</string>
     <string name="back_button">Back</string>
-    <string name="last_game_score_text">Last Game&apos;s Score: </string>
+    <string name="last_game_score_text">Last Game\'s Score: </string>
     <string name="option_a">Option A</string>
     <string name="option_b">Option B</string>
     <string name="option_c">Option C</string>

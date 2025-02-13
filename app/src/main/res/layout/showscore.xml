@@ -35,7 +35,7 @@
             android:gravity="center"
             android:text="@string/last_game_score_text"
             android:textColor="#8B1C1C"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
 
@@ -49,7 +49,7 @@
             android:fontFamily="@font/irish_grover"
             android:text="@string/back_button"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
 
     </LinearLayout>
