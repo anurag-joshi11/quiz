@@ -29,20 +29,24 @@ class ResultsActivity : ComponentActivity() {
         val questionsList: List<Question>? = intent.getParcelableArrayListExtra("questions")
         val score = intent.getIntExtra("score", 0)
         val selectedAnswers = intent.getIntArrayExtra("selectedAnswers")
+        val selectedQuestions = intent.getIntegerArrayListExtra("selectedQuestions") // Order of selected questions
+
+        // Ensure selectedQuestions is not null and reorder the questions list
+        val orderedQuestionsList = selectedQuestions?.mapNotNull { index ->
+            questionsList?.getOrNull(index)
+        } ?: emptyList()
 
         // Display final score
         tvScore.text = "Score: $score"
 
-        // Check if questionsList is not null and display the questions and answers
-        questionsList?.forEachIndexed { index, question ->
-            val selectedAnswer = selectedAnswers?.get(index) ?: 0
-            val answerStatus = if (selectedAnswer == question.correctAnswerIndex) {
-                "✅ Correct"
-            } else {
-                "❌ Incorrect"
-            }
+        // Display questions in the order of selectedQuestions
+        orderedQuestionsList.forEachIndexed { index, question ->
+            val selectedAnswerIndex = selectedAnswers?.get(index) ?: -1
+            val correctAnswerIndex = question.correctAnswerIndex
 
-            // Create TextViews for each question and answer pair
+            val answerStatus = if (selectedAnswerIndex == correctAnswerIndex) "✅ Correct" else "❌ Incorrect"
+
+            // Create TextViews for question, selected answer, correct answer, and status
             val questionTextView = TextView(this).apply {
                 text = "Q${index + 1}: ${question.question}"
                 textSize = 20f
@@ -50,13 +54,13 @@ class ResultsActivity : ComponentActivity() {
             }
 
             val selectedAnswerTextView = TextView(this).apply {
-                text = "Your Answer: ${question.options.getOrNull(selectedAnswer - 1) ?: "N/A"}"
+                text = "Your Answer: ${question.options.getOrNull(selectedAnswerIndex - 1) ?: "N/A"}"
                 textSize = 18f
                 setTextColor(resources.getColor(R.color.black, theme))
             }
 
             val correctAnswerTextView = TextView(this).apply {
-                text = "Correct Answer: ${question.options.getOrNull(question.correctAnswerIndex - 1) ?: "N/A"}"
+                text = "Correct Answer: ${question.options.getOrNull(correctAnswerIndex - 1) ?: "N/A"}"
                 textSize = 18f
                 setTextColor(resources.getColor(R.color.garnet, theme))
             }
@@ -65,14 +69,14 @@ class ResultsActivity : ComponentActivity() {
                 text = answerStatus
                 textSize = 18f
                 setTextColor(
-                    if (selectedAnswer == question.correctAnswerIndex)
+                    if (selectedAnswerIndex == correctAnswerIndex)
                         resources.getColor(R.color.green, theme)
                     else
                         resources.getColor(R.color.red, theme)
                 )
             }
 
-            // Add each TextView to the layout
+            // Add views to the layout
             linearResults.addView(questionTextView)
             linearResults.addView(selectedAnswerTextView)
             linearResults.addView(correctAnswerTextView)
@@ -82,7 +86,7 @@ class ResultsActivity : ComponentActivity() {
             val space = Space(this).apply {
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    20 // space height
+                    20 // Space height
                 )
             }
             linearResults.addView(space)

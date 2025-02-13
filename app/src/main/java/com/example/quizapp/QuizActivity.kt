@@ -42,29 +42,29 @@ class QuizActivity : ComponentActivity() {
     )
 
     private val options = arrayOf(
-        arrayOf("Paris", "London", "Berlin"),
-        arrayOf("Mars", "Jupiter", "Venus"),
+        arrayOf("London", "Paris", "Berlin"),
+        arrayOf("Venus", "Jupiter", "Mars"),
         arrayOf("Harper Lee", "J.K. Rowling", "Ernest Hemingway"),
         arrayOf("Pacific", "Atlantic", "Indian"),
         arrayOf("Nile", "Amazon", "Yangtze"),
-        arrayOf("8", "6", "10"),
+        arrayOf("6", "8", "10"),
         arrayOf("Brazil", "China", "USA"),
-        arrayOf("Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh"),
+        arrayOf("Pablo Picasso", "Vincent van Gogh", "Leonardo da Vinci"),
         arrayOf("Au", "Ag", "Fe"),
         arrayOf("Africa", "Asia", "Europe"),
-        arrayOf("Oxygen", "Carbon Dioxide", "Nitrogen"),
+        arrayOf("Oxygen", "Nitrogen", "Carbon Dioxide"),
         arrayOf("Newton", "Einstein", "Tesla"),
         arrayOf("Beaver", "Eagle", "Moose"),
-        arrayOf("Hydrogen", "Helium", "Oxygen"),
-        arrayOf("Diamond", "Gold", "Platinum"),
+        arrayOf("Helium", "Oxygen", "Hydrogen"),
+        arrayOf("Gold", "Platinum", "Diamond"),
         arrayOf("Alexander Fleming", "Marie Curie", "Louis Pasteur"),
-        arrayOf("Jupiter", "Saturn", "Neptune"),
+        arrayOf("Saturn", "Jupiter", "Neptune"),
         arrayOf("0°C", "-10°C", "5°C"),
-        arrayOf("Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin"),
+        arrayOf("Buzz Aldrin", "Neil Armstrong", "Yuri Gagarin"),
         arrayOf("Football", "Basketball", "Cricket")
     )
 
-    private val correctAnswers = arrayOf(1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 2, 2, 1, 1, 3, 1, 1, 1, 1, 3)
+    private val correctAnswers = arrayOf(2, 3, 1, 1, 2, 2, 1, 3, 1, 1, 3, 2, 1, 3, 3, 1, 2, 1, 2, 3)
 
     private var score = 0
     private var questionIndex = 0
@@ -84,7 +84,7 @@ class QuizActivity : ComponentActivity() {
         tvTimer = findViewById(R.id.tvTimer)
 
         // Randomly select 20 unique questions
-        selectedQuestions = questions.indices.shuffled().take(20)
+        selectedQuestions = questions.indices.shuffled().take(4)
         loadQuestion()
 
         btnOptionA.setOnClickListener { checkAnswer(1) }
@@ -110,6 +110,8 @@ class QuizActivity : ComponentActivity() {
     }
 
     private fun checkAnswer(selected: Int) {
+        countDownTimer?.cancel()  // Stop the timer when the user answers
+
         val qIndex = selectedQuestions[questionIndex]
         selectedAnswers[questionIndex] = selected
 
@@ -117,12 +119,11 @@ class QuizActivity : ComponentActivity() {
             score++
         }
 
-        questionIndex++
-
-        if (questionIndex >= selectedQuestions.size) {
-            showResults()
-        } else {
+        if (questionIndex < selectedQuestions.size - 1) {
+            questionIndex++
             loadQuestion()
+        } else {
+            showResults()
         }
     }
 
@@ -142,8 +143,13 @@ class QuizActivity : ComponentActivity() {
             }
 
             override fun onFinish() {
-                questionIndex++
-                loadQuestion()
+                // Ensure that the questionIndex does not increment beyond the limit
+                if (questionIndex < selectedQuestions.size - 1) {
+                    questionIndex++
+                    loadQuestion()
+                } else {
+                    showResults()
+                }
             }
         }.start()
     }
