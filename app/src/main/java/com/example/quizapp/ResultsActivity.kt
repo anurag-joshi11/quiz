@@ -2,96 +2,95 @@ package com.example.quizapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.ComponentActivity
-import androidx.core.content.ContextCompat
 
 class ResultsActivity : ComponentActivity() {
 
+    private lateinit var tvTitle: TextView
+    private lateinit var tvResultsHeader: TextView
     private lateinit var linearResults: LinearLayout
     private lateinit var tvScore: TextView
     private lateinit var btnOK: Button
 
-    // Assuming these are passed from the QuizActivity via Intent or another method
-    private var selectedQuestions: List<Int>? = null
-    private var selectedAnswers: List<Int>? = null
-    private var correctAnswers: List<Int>? = null
-    private var questions: List<String>? = null
-    private var options: List<List<String>> = listOf() // List of answer options for each question
-
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_results_screen) // Ensure this is the correct layout
+        setContentView(R.layout.activity_results_screen)
 
-        // Initialize Views
+        // Initialize views
+        tvTitle = findViewById(R.id.tvTitle)
+        tvResultsHeader = findViewById(R.id.tvResultsHeader)
         linearResults = findViewById(R.id.linearResults)
         tvScore = findViewById(R.id.tvScore)
         btnOK = findViewById(R.id.btnOK)
 
-        // Retrieve passed data from the Intent's extras
-        val bundle = intent.extras
-        selectedQuestions = bundle?.getIntegerArrayList("selectedQuestions")
-        selectedAnswers = bundle?.getIntegerArrayList("selectedAnswers")
-        correctAnswers = bundle?.getIntegerArrayList("correctAnswers")
-        questions = bundle?.getStringArrayList("questions")
-        options = bundle?.getSerializable("options") as? List<List<String>> ?: listOf()
+        // Get data from Intent
+        val questionsList: List<Question>? = intent.getParcelableArrayListExtra("questions")
+        val score = intent.getIntExtra("score", 0)
+        val selectedAnswers = intent.getIntArrayExtra("selectedAnswers")
 
-        // Calculate the score based on the selected answers
-        var score = 0
-        selectedAnswers?.forEachIndexed { index, selectedAnswerIndex ->
-            if (selectedAnswerIndex == correctAnswers?.get(index)) {
-                score++
-            }
-        }
-
-        // Set score text
+        // Display final score
         tvScore.text = "Score: $score"
 
-        // Display the questions, selected answers, and correct answers dynamically
-        selectedQuestions?.forEachIndexed { index, questionIndex ->
-            val question = questions?.get(questionIndex) ?: "No Question"
-            val selectedOption = options.getOrNull(questionIndex)?.getOrNull(selectedAnswers?.get(index) ?: 0) ?: "No Answer"
-            val correctOption = options.getOrNull(questionIndex)?.getOrNull(correctAnswers?.get(questionIndex) ?: 0) ?: "No Answer"
+        // Check if questionsList is not null and display the questions and answers
+        questionsList?.forEachIndexed { index, question ->
+            val selectedAnswer = selectedAnswers?.get(index) ?: 0
+            val answerStatus = if (selectedAnswer == question.correctAnswerIndex) {
+                "✅ Correct"
+            } else {
+                "❌ Incorrect"
+            }
 
-            // Create and set Question TextView
+            // Create TextViews for each question and answer pair
             val questionTextView = TextView(this).apply {
-                text = "Q${index + 1}: $question"
-                textSize = 22f
-                setTextColor(ContextCompat.getColor(this@ResultsActivity, R.color.black))
-                setTypeface(null, android.graphics.Typeface.BOLD)
+                text = "Q${index + 1}: ${question.question}"
+                textSize = 20f
+                setTextColor(resources.getColor(R.color.black, theme))
             }
-            linearResults.addView(questionTextView)
 
-            // Create and set Selected Answer TextView
             val selectedAnswerTextView = TextView(this).apply {
-                text = "Your Answer: $selectedOption"
-                textSize = 22f
-                setTextColor(ContextCompat.getColor(this@ResultsActivity, R.color.black))
+                text = "Your Answer: ${question.options.getOrNull(selectedAnswer - 1) ?: "N/A"}"
+                textSize = 18f
+                setTextColor(resources.getColor(R.color.black, theme))
             }
-            linearResults.addView(selectedAnswerTextView)
 
-            // Create and set Correct Answer TextView
             val correctAnswerTextView = TextView(this).apply {
-                text = "Correct Answer: $correctOption"
-                textSize = 22f
-                setTextColor(ContextCompat.getColor(this@ResultsActivity, R.color.green))  // Color for correct answer
+                text = "Correct Answer: ${question.options.getOrNull(question.correctAnswerIndex - 1) ?: "N/A"}"
+                textSize = 18f
+                setTextColor(resources.getColor(R.color.garnet, theme))
             }
-            linearResults.addView(correctAnswerTextView)
 
-            // Add spacing between each question
-            val space = View(this).apply {
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 20)
+            val statusTextView = TextView(this).apply {
+                text = answerStatus
+                textSize = 18f
+                setTextColor(
+                    if (selectedAnswer == question.correctAnswerIndex)
+                        resources.getColor(R.color.green, theme)
+                    else
+                        resources.getColor(R.color.red, theme)
+                )
+            }
+
+            // Add each TextView to the layout
+            linearResults.addView(questionTextView)
+            linearResults.addView(selectedAnswerTextView)
+            linearResults.addView(correctAnswerTextView)
+            linearResults.addView(statusTextView)
+
+            // Add space between questions
+            val space = Space(this).apply {
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    20 // space height
+                )
             }
             linearResults.addView(space)
         }
 
-        // Set up the OK button to finish the activity when clicked
+        // Set the button to finish the activity when clicked
         btnOK.setOnClickListener {
-            finish() // Close the ResultsActivity and return to the previous activity
+            finish()
         }
     }
 }
