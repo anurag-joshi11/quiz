@@ -13,7 +13,7 @@ class ShowScoreActivity : ComponentActivity() {
         val btnBack: Button = findViewById(R.id.btnBack)
 
         btnBack.setOnClickListener {
-            finish() // This will close StartGameActivity and return to the previous activity (MainActivity)
+            finish() // This will close StartQuizActivity and return to the previous activity (MainActivity)
         }
     }
 }

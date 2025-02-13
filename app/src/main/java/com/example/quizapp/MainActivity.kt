@@ -13,9 +13,9 @@ class MainActivity : ComponentActivity() {
         // Find the OK button by ID
         val okButton: Button = findViewById(R.id.okButton)
 
-        // Set click listener to navigate to StartGameActivity
+        // Set click listener to navigate to StartQuizActivity
         okButton.setOnClickListener {
-            val intent = Intent(this, StartGameActivity::class.java)
+            val intent = Intent(this, StartQuizActivity::class.java)
             startActivity(intent)
         }
     }
