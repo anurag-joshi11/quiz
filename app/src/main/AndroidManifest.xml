@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -25,6 +26,8 @@
         <activity android:name=".QuizActivity" android:exported="true" />
         <activity android:name=".ShowScoreActivity" android:exported="true" />
         <activity android:name=".ResultsActivity" android:exported="true" />
+        <service android:name=".MusicService" android:enabled="true" android:exported="false"/>
+
     </application>
 
 </manifest>
