@@ -70,6 +70,7 @@ class QuizActivity : ComponentActivity() {
     private var score = 0
     private var questionIndex = 0
     private lateinit var selectedQuestions: List<Int>
+    private var selectedAnswers = IntArray(20) // Array to track selected answers
     private var countDownTimer: CountDownTimer? = null // To manage the countdown timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,11 +111,20 @@ class QuizActivity : ComponentActivity() {
 
     private fun checkAnswer(selected: Int) {
         val qIndex = selectedQuestions[questionIndex]
+        selectedAnswers[questionIndex] = selected // Store the selected answer
+
         if (selected == correctAnswers[qIndex]) {
-            score++
+            score++ // Increment score if answer is correct
         }
+
         questionIndex++
-        loadQuestion()
+
+        // If it's the last question, show results, otherwise load the next question
+        if (questionIndex >= selectedQuestions.size) {
+            showResults()
+        } else {
+            loadQuestion()
+        }
     }
 
     private fun changeBackgroundColor() {
@@ -143,9 +153,27 @@ class QuizActivity : ComponentActivity() {
     }
 
     private fun showResults() {
+        // Store the last score using SharedPreferences
+        val sharedPreferences = getSharedPreferences("quiz_app", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("last_score", score)  // Save score as "last_score"
+        editor.apply()  // Commit the changes
+
+        // Pass score, questions, answers, selected answers, and correct answers to ResultsActivity
         val intent = Intent(this, ResultsActivity::class.java)
+
+        // Pass the entire arrays of questions, answers, and correct answers
+        intent.putExtra("questions", questions)
+        intent.putExtra("options", options)
+        intent.putExtra("correctAnswers", correctAnswers)
         intent.putExtra("score", score)
+
+        // Pass selected questions as a list
         intent.putIntegerArrayListExtra("selectedQuestions", ArrayList(selectedQuestions))
+
+        // Pass the selected answers to ResultsActivity
+        intent.putExtra("selectedAnswers", selectedAnswers)
+
         startActivity(intent)
         finish()
     }
