@@ -12,7 +12,7 @@
         android:background="#8B1C1C"
         android:text="@string/header_message"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:gravity="center"
         android:padding="12dp"
         android:textStyle="bold" />
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Results"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#8B1C1C"
         android:gravity="center"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Q1: Quiz Question 1"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -60,21 +60,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/option_a"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 android:textColor="#000000" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/option_b"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 android:textColor="#8B1C1C" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/option_c"
-                android:textSize="16sp"
+                android:textSize="22sp"
                 android:textColor="#008000" />
 
             <!-- More questions should be dynamically added in the activity -->

@@ -43,7 +43,7 @@
             android:fontFamily="@font/irish_grover"
             android:text="@string/play_button"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <!-- Show Score Button -->
         <Button
@@ -55,7 +55,7 @@
             android:fontFamily="@font/irish_grover"
             android:text="@string/show_score_button"
             android:textColor="#8B1C1C"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <!-- Back Button -->
         <Button
@@ -67,7 +67,7 @@
             android:fontFamily="@font/irish_grover"
             android:text="@string/back_button"
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
 
