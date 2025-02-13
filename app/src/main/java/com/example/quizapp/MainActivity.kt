@@ -10,6 +10,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) // Load the XML layout
 
+        // Start music service if not already running
+        startService(Intent(this, MusicService::class.java))
+
         // Find the OK button by ID
         val okButton: Button = findViewById(R.id.okButton)
 
@@ -17,6 +20,13 @@ class MainActivity : ComponentActivity() {
         okButton.setOnClickListener {
             val intent = Intent(this, StartQuizActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isFinishing) {
+            stopService(Intent(this, MusicService::class.java))
         }
     }
 }
