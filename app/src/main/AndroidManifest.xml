@@ -24,6 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".StartGameActivity" android:exported="true"/>
+        <activity android:name=".GameActivity" android:exported="true" />
+        <activity android:name=".ShowScoreActivity" android:exported="true" />
     </application>
 
 </manifest>
