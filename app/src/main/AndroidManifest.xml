@@ -24,6 +24,7 @@
         <activity android:name=".StartQuizActivity" android:exported="true"/>
         <activity android:name=".QuizActivity" android:exported="true" />
         <activity android:name=".ShowScoreActivity" android:exported="true" />
+        <activity android:name=".ResultsActivity" android:exported="true" />
     </application>
 
 </manifest>

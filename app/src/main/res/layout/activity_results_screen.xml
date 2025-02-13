@@ -10,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/garnet"
+        android:gravity="center"
+        android:padding="12dp"
         android:text="@string/header_message"
         android:textColor="@android:color/white"
         android:textSize="28sp"
-        android:gravity="center"
-        android:padding="12dp"
         android:textStyle="bold" />
 
     <!-- Results Header -->
@@ -22,23 +22,23 @@
         android:id="@+id/tvResultsHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Results"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/garnet"
-        android:gravity="center"
         android:layout_below="@id/tvTitle"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Results"
+        android:textColor="@color/garnet"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <!-- Results List -->
     <ScrollView
         android:id="@+id/scrollResults"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/scoreContainer"
         android:layout_below="@id/tvResultsHeader"
-        android:layout_marginTop="10dp"
-        android:layout_above="@id/scoreContainer">
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:id="@+id/linearResults"
@@ -46,39 +46,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
-
-            <!-- Sample Question and Answers (Dynamic Content) -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Q1: Quiz Question 1"
-                android:textSize="22sp"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/option_a"
-                android:textSize="22sp"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/option_b"
-                android:textSize="22sp"
-                android:textColor="@color/red" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/option_c"
-                android:textSize="22sp"
-                android:textColor="@color/green" />
-
-            <!-- More questions should be dynamically added in the activity -->
-
+            <!-- Dynamic Question and Answers (Content will be added dynamically in ResultsActivity) -->
         </LinearLayout>
 
     </ScrollView>
@@ -88,22 +56,22 @@
         android:id="@+id/scoreContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <!-- Score Display -->
         <TextView
             android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Score: 2"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:layout_marginBottom="10dp" />
+            android:text="Score: 2"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!-- OK Button -->
         <Button
@@ -114,7 +82,6 @@
             android:text="@string/ok_button"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
-
     </LinearLayout>
 
 </RelativeLayout>
