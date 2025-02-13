@@ -138,6 +138,7 @@ class QuizActivity : ComponentActivity() {
         countDownTimer?.cancel()
 
         countDownTimer = object : CountDownTimer(10000, 1000) {
+            @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 tvTimer.text = "Time left: ${millisUntilFinished / 1000}s"
             }
