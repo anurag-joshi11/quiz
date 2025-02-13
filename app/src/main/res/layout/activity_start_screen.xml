@@ -39,7 +39,7 @@
             android:layout_width="250dp"
             android:layout_height="62dp"
             android:layout_marginTop="50dp"
-            android:backgroundTint="#8B1C1C"
+            android:backgroundTint="@color/garnet"
             android:fontFamily="@font/irish_grover"
             android:text="@string/play_button"
             android:textColor="@android:color/white"
@@ -54,7 +54,7 @@
             android:backgroundTint="#E0E0E0"
             android:fontFamily="@font/irish_grover"
             android:text="@string/show_score_button"
-            android:textColor="#8B1C1C"
+            android:textColor="@color/garnet"
             android:textSize="20sp" />
 
         <!-- Back Button -->
@@ -63,7 +63,7 @@
             android:layout_width="250dp"
             android:layout_height="62dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#8B1C1C"
+            android:backgroundTint="@color/garnet"
             android:fontFamily="@font/irish_grover"
             android:text="@string/back_button"
             android:textColor="@android:color/white"

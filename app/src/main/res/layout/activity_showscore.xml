@@ -9,7 +9,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#8B1C1C"
+        android:background="@color/garnet"
         android:text="@string/header_message"
         android:textColor="@android:color/white"
         android:textSize="24sp"
@@ -34,7 +34,7 @@
             android:fontFamily="@font/irish_grover"
             android:gravity="center"
             android:text="@string/last_game_score_text"
-            android:textColor="#8B1C1C"
+            android:textColor="@color/garnet"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
             android:layout_width="250dp"
             android:layout_height="62dp"
             android:layout_marginTop="40dp"
-            android:backgroundTint="#8B1C1C"
+            android:backgroundTint="@color/garnet"
             android:fontFamily="@font/irish_grover"
             android:text="@string/back_button"
             android:textColor="@android:color/white"
