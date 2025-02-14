@@ -173,6 +173,11 @@ class QuizActivity : ComponentActivity() {
             putExtra("selectedAnswers", selectedAnswers)
         }
 
+        val sharedPreferences = getSharedPreferences("QuizGamePrefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("LAST_SCORE", score) //
+        editor.apply()
+
         startActivity(intent)
         finish()
     }

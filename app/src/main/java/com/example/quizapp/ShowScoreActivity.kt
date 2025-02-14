@@ -12,6 +12,14 @@ class ShowScoreActivity : ComponentActivity() {
 
         val btnBack: Button = findViewById(R.id.btnBack)
 
+        val sharedPreferences = getSharedPreferences("QuizGamePrefs", MODE_PRIVATE)
+        val lastScore = sharedPreferences.getInt("LAST_SCORE", 0) // Default score is 0 if no data found
+
+      // Assuming you have a TextView with id scoreTextView
+        val scoreTextView = findViewById<TextView>(R.id.tvScoreLabel)
+        scoreTextView.text = "Last Game’s Score: $lastScore"
+
+
         btnBack.setOnClickListener {
             finish() // This will close StartQuizActivity and return to the previous activity (MainActivity)
         }
