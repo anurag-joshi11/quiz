@@ -92,6 +92,9 @@ class ResultsActivity : ComponentActivity() {
             linearResults.addView(space)
         }
 
+
+
+
         // Set the button to finish the activity when clicked
         btnOK.setOnClickListener {
             finish()
