@@ -128,7 +128,7 @@ class QuizActivity : ComponentActivity() {
     }
 
     private fun changeBackgroundColor() {
-        val colors = arrayOf("#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#FFD700")
+        val colors = arrayOf("#FF9F80", "#80FF99", "#80A6FF", "#FF80C2", "#FFE066")
         val newColor = Color.parseColor(colors[questionIndex % colors.size])
         val rootView = findViewById<View>(android.R.id.content)
         rootView.setBackgroundColor(newColor)
