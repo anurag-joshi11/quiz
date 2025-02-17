@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!--hello-->
-
     <!-- Header Section at the Top -->
     <TextView
         android:id="@+id/headerText"
@@ -72,7 +70,6 @@
             android:src="@drawable/uottawa_garnet"
             android:layout_gravity="center"
             android:layout_marginTop="90dp"/>
-
     </LinearLayout>
 
 </RelativeLayout>

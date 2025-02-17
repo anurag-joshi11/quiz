@@ -10,9 +10,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 
+/**
+ * Activity that manages the quiz gameplay, including displaying questions,
+ * handling answers, and showing results.
+ */
 class QuizActivity : ComponentActivity() {
 
-    // UI elements for displaying the question and answer options
+    // UI elements
     private lateinit var tvQuestion: TextView
     private lateinit var btnOptionA: Button
     private lateinit var btnOptionB: Button
@@ -43,7 +47,7 @@ class QuizActivity : ComponentActivity() {
         "Which sport is known as the 'king of sports'?"
     )
 
-    // Multiple-choice answer options for each question
+    // Answer options corresponding to each question
     private val options = arrayOf(
         arrayOf("London", "Paris", "Berlin"),
         arrayOf("Venus", "Jupiter", "Mars"),
@@ -67,13 +71,33 @@ class QuizActivity : ComponentActivity() {
         arrayOf("Football", "Basketball", "Cricket")
     )
 
-    // The correct answer indices for each question (1-based indexing)
-    private val correctAnswers = arrayOf(2, 3, 1, 1, 2, 2, 1, 3, 1, 1, 3, 2, 1, 3, 3, 1, 2, 1, 2, 3)
+    private val correctAnswers = arrayOf(
+        2, // Paris
+        3, // Mars
+        1, // Harper Lee
+        1, // Pacific
+        2, // Amazon
+        2, // 8
+        1, // Brazil
+        3, // Leonardo da Vinci
+        1, // Au
+        1, // Africa
+        3, // Carbon Dioxide
+        2, // Einstein
+        1, // Beaver
+        3, // Hydrogen
+        3, // Diamond
+        1, // Alexander Fleming
+        2, // Jupiter
+        1, // 0°C
+        2, // Neil Armstrong
+        3  // Football
+    )
 
-    private var score = 0 // Stores the player's score
-    private var questionIndex = 0 // Keeps track of the current question
-    private lateinit var selectedQuestions: List<Int> // Stores randomly selected question indices
-    private var selectedAnswers = IntArray(20) // Stores the player's selected answers
+    private var score = 0
+    private var questionIndex = 0
+    private lateinit var selectedQuestions: List<Int>
+    private var selectedAnswers = IntArray(20)
 
     private var countDownTimer: CountDownTimer? = null // Countdown timer for each question
 
@@ -81,55 +105,63 @@ class QuizActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions_array)
 
-        // Link UI elements with their XML IDs
+        // Bind UI elements to their XML counterparts
         tvQuestion = findViewById(R.id.tvQuestion)
         btnOptionA = findViewById(R.id.btnOptionA)
         btnOptionB = findViewById(R.id.btnOptionB)
         btnOptionC = findViewById(R.id.btnOptionC)
         tvTimer = findViewById(R.id.tvTimer)
 
-        // Randomly select a set of unique questions (choosing 4 out of 20 for this session)
+        // Randomly select a set of unique questions (4 out of 20)
         selectedQuestions = questions.indices.shuffled().take(4)
 
         // Load the first question
         loadQuestion()
 
-        // Set click listeners for answer buttons
+        // Set up button click listeners for answer options
         btnOptionA.setOnClickListener { checkAnswer(1) }
         btnOptionB.setOnClickListener { checkAnswer(2) }
         btnOptionC.setOnClickListener { checkAnswer(3) }
     }
 
+    /**
+     * Loads and displays the next question along with the options.
+     * Also starts the countdown timer.
+     */
     @SuppressLint("SetTextI18n")
     private fun loadQuestion() {
-        // If all selected questions have been answered, show the results
+        // If all questions have been answered, show the results
         if (questionIndex >= selectedQuestions.size) {
             showResults()
             return
         }
 
-        val qIndex = selectedQuestions[questionIndex] // Get the index of the current question
-        tvQuestion.text = "Q${questionIndex + 1}: ${questions[qIndex]}" // Display the question text
-        btnOptionA.text = options[qIndex][0] // Set text for option A
-        btnOptionB.text = options[qIndex][1] // Set text for option B
-        btnOptionC.text = options[qIndex][2] // Set text for option C
+        val qIndex = selectedQuestions[questionIndex]
+        tvQuestion.text = "Q${questionIndex + 1}: ${questions[qIndex]}"
+        btnOptionA.text = options[qIndex][0]
+        btnOptionB.text = options[qIndex][1]
+        btnOptionC.text = options[qIndex][2]
 
-        changeBackgroundColor() // Change background color for each question
-        startTimer() // Start the countdown timer
+        changeBackgroundColor() // Change background color for the current question
+        startTimer() // Start the countdown timer for this question
     }
 
+    /**
+     * Checks the user's answer, updates the score, and moves to the next question.
+     * @param selected The selected answer index (1, 2, or 3).
+     */
     private fun checkAnswer(selected: Int) {
-        countDownTimer?.cancel() // Stop the timer when the user answers
+        countDownTimer?.cancel() // Stop the timer when an answer is selected
 
-        val qIndex = selectedQuestions[questionIndex] // Get the current question index
-        selectedAnswers[questionIndex] = selected // Store the user's answer
+        val qIndex = selectedQuestions[questionIndex]
+        selectedAnswers[questionIndex] = selected
 
-        // Check if the selected answer matches the correct answer
+        // If correct, increase the score
         if (selected == correctAnswers[qIndex]) {
-            score++ // Increase score for correct answers
+            score++
         }
 
-        // Move to the next question or show results if it was the last one
+        // Move to the next question or show results if it's the last one
         if (questionIndex < selectedQuestions.size - 1) {
             questionIndex++
             loadQuestion()
@@ -138,15 +170,19 @@ class QuizActivity : ComponentActivity() {
         }
     }
 
-    // Changes the background color dynamically to add variety to each question
+    /**
+     * Changes the background color to add visual variety.
+     */
     private fun changeBackgroundColor() {
         val colors = arrayOf("#2F63A7", "#AEA052", "#126659", "#783E27", "#540833")
-        val newColor = Color.parseColor(colors[questionIndex % colors.size]) // Cycle through colors
-        val rootView = findViewById<View>(android.R.id.content) // Get root view
-        rootView.setBackgroundColor(newColor) // Apply new background color
+        val newColor = Color.parseColor(colors[questionIndex % colors.size])
+        val rootView = findViewById<View>(android.R.id.content)
+        rootView.setBackgroundColor(newColor) // Apply new color to background
     }
 
-    // Starts a 10-second countdown timer for each question
+    /**
+     * Starts a 10-second countdown timer for each question.
+     */
     private fun startTimer() {
         countDownTimer?.cancel() // Cancel any existing timer
 
@@ -157,7 +193,7 @@ class QuizActivity : ComponentActivity() {
             }
 
             override fun onFinish() {
-                // Move to the next question when time runs out
+                // Move to the next question or show results when time runs out
                 if (questionIndex < selectedQuestions.size - 1) {
                     questionIndex++
                     loadQuestion()
@@ -168,9 +204,11 @@ class QuizActivity : ComponentActivity() {
         }.start()
     }
 
-    // Navigates to the results screen, passing the player's answers and score
+    /**
+     * Navigates to the results screen and passes the player's score and answers.
+     */
     private fun showResults() {
-        // Convert the raw question data into Question objects
+        // Convert question data to Question objects for passing to the results screen
         val questionsList = questions.indices.map { i ->
             Question(
                 question = questions[i],
@@ -179,21 +217,21 @@ class QuizActivity : ComponentActivity() {
             )
         }
 
-        // Create an intent to switch to ResultsActivity and pass the required data
+        // Create an intent to navigate to the results screen
         val intent = Intent(this, ResultsActivity::class.java).apply {
-            putParcelableArrayListExtra("questions", ArrayList(questionsList)) // Pass questions
-            putExtra("score", score) // Pass final score
-            putIntegerArrayListExtra("selectedQuestions", ArrayList(selectedQuestions)) // Pass selected question indices
+            putParcelableArrayListExtra("questions", ArrayList(questionsList))
+            putExtra("score", score) // Pass the score
+            putIntegerArrayListExtra("selectedQuestions", ArrayList(selectedQuestions))
             putExtra("selectedAnswers", selectedAnswers) // Pass selected answers
         }
 
-        // Save the last score in shared preferences
+        // Save the score to shared preferences for future use
         val sharedPreferences = getSharedPreferences("QuizGamePrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putInt("LAST_SCORE", score)
         editor.apply()
 
-        startActivity(intent) // Start results activity
-        finish() // Close the quiz activity
+        startActivity(intent)
+        finish()
     }
 }

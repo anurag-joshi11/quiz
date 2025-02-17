@@ -29,45 +29,19 @@
         android:gravity="center"
         android:padding="16dp">
 
-<!--
-        <TextView
-            android:id="@+id/tvTimer"
-            android:layout_width="92dp"
-            android:layout_height="54dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
-            android:text="test"
-            android:textColor="@color/red"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tvQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/irish_grover"
-            android:gravity="center"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="5dp"
-            android:padding="10dp"
-            android:text="question"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
--->
         <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp">
 
-            <!-- Timer TextView (Added) -->
+            <!-- Timer TextView -->
             <TextView
                 android:id="@+id/tvTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="timer"
-                android:textSize="18sp"
-                android:textColor="@android:color/holo_red_dark"
+                android:text=""
+                android:textSize="19sp"
+                android:textColor="@color/red"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"/>
 
@@ -76,17 +50,17 @@
                 android:id="@+id/tvQuestion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sample Question?"
-                android:textSize="20sp"
+                android:text=""
+                android:textSize="21sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:padding="10dp"
+                android:textColor="@color/black"
                 android:layout_below="@id/tvTimer"
                 android:layout_centerHorizontal="true"/>
 
-            <!-- Other Views (e.g., Buttons for answers) -->
-
         </RelativeLayout>
+
     </LinearLayout>
 
     <!-- Options Container -->
@@ -134,7 +108,6 @@
             android:text="@string/option_c"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
-
     </LinearLayout>
 
 </RelativeLayout>
