@@ -10,7 +10,6 @@
     <!-- Header Section at the Top -->
 
     <!-- Title -->
-
     <TextView
         android:id="@+id/headerText"
         android:layout_width="match_parent"
@@ -69,6 +68,5 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
     </LinearLayout>
-
 
 </RelativeLayout>

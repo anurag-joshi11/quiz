@@ -3,40 +3,49 @@ package com.example.quizapp
 import android.os.Parcel
 import android.os.Parcelable
 
-// Data class representing a quiz question. Implements Parcelable so it can be passed between activities.
+/**
+ * Represents a quiz question.
+ * Implements [Parcelable] to allow easy data transfer between activities.
+ *
+ * @property question The text of the question.
+ * @property options List of possible answer choices.
+ * @property correctAnswerIndex The index of the correct answer in [options].
+ */
 data class Question(
-    val question: String, // The text of the question
-    val options: List<String>, // A list of possible answer choices
-    val correctAnswerIndex: Int // The index (position) of the correct answer in the options list
+    val question: String,
+    val options: List<String>,
+    val correctAnswerIndex: Int
 ) : Parcelable {
 
-    // Secondary constructor to create a Question object from a Parcel (used for passing data between activities)
+    /**
+     * Constructs a [Question] object from a [Parcel].
+     */
     constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "", // Read the question string from the parcel, default to empty string if null
-        parcel.createStringArrayList() ?: arrayListOf(), // Read the options list from the parcel, default to empty list if null
-        parcel.readInt() // Read the correct answer index from the parcel
+        parcel.readString() ?: "",
+        parcel.createStringArrayList() ?: arrayListOf(),
+        parcel.readInt()
     )
 
-    // Writes the object's data to the parcel (needed for Parcelable implementation)
+    /**
+     * Writes the object data into a [Parcel].
+     */
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(question) // Store the question text in the parcel
-        parcel.writeStringList(options) // Store the options list in the parcel
-        parcel.writeInt(correctAnswerIndex) // Store the index of the correct answer in the parcel
+        parcel.writeString(question)
+        parcel.writeStringList(options)
+        parcel.writeInt(correctAnswerIndex)
     }
 
-    // Describes the content type of the Parcelable object (usually 0, unless special behavior is needed)
     override fun describeContents(): Int = 0
 
-    // Companion object that helps in creating Question objects from a Parcel
     companion object CREATOR : Parcelable.Creator<Question> {
-        // Creates a Question instance from a Parcel (used when retrieving the object)
-        override fun createFromParcel(parcel: Parcel): Question {
-            return Question(parcel)
-        }
+        /**
+         * Creates a [Question] instance from a [Parcel].
+         */
+        override fun createFromParcel(parcel: Parcel): Question = Question(parcel)
 
-        // Creates an array of Question objects (used when passing multiple questions)
-        override fun newArray(size: Int): Array<Question?> {
-            return arrayOfNulls(size)
-        }
+        /**
+         * Creates an array of [Question] objects.
+         */
+        override fun newArray(size: Int): Array<Question?> = arrayOfNulls(size)
     }
 }

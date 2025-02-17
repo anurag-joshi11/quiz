@@ -2,24 +2,35 @@ package com.example.quizapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.*
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Space
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 
+/**
+ * ResultsActivity displays the results of the quiz, showing each question,
+ * the user's selected answer, the correct answer, and whether the answer was correct or not.
+ */
 class ResultsActivity : ComponentActivity() {
 
     // Declare UI elements
-    private lateinit var tvTitle: TextView // Title of the results screen
-    private lateinit var tvResultsHeader: TextView // Header text displaying "Results"
-    private lateinit var linearResults: LinearLayout // Layout to dynamically display question results
-    private lateinit var tvScore: TextView // TextView to display the final score
-    private lateinit var btnOK: Button // Button to acknowledge results and close screen
+    private lateinit var tvTitle: TextView
+    private lateinit var tvResultsHeader: TextView
+    private lateinit var linearResults: LinearLayout
+    private lateinit var tvScore: TextView
+    private lateinit var btnOK: Button
 
+    /**
+     * Called when the activity is created.
+     * Sets up the UI elements and displays the results based on the data passed from the previous activity.
+     */
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_results_screen) // Load the results screen layout
+        setContentView(R.layout.activity_results_screen)
 
-        // Link UI elements with their IDs in the layout file
+        // Link UI elements to the layout views
         tvTitle = findViewById(R.id.tvTitle)
         tvResultsHeader = findViewById(R.id.tvResultsHeader)
         linearResults = findViewById(R.id.linearResults)
@@ -27,57 +38,57 @@ class ResultsActivity : ComponentActivity() {
         btnOK = findViewById(R.id.btnOK)
 
         // Retrieve quiz data passed from the previous activity
-        val questionsList: List<Question>? = intent.getParcelableArrayListExtra("questions") // Full list of quiz questions
-        val score = intent.getIntExtra("score", 0) // Retrieve the user's final score
-        val selectedAnswers = intent.getIntArrayExtra("selectedAnswers") // Array of the user's selected answers
-        val selectedQuestions = intent.getIntegerArrayListExtra("selectedQuestions") // Order in which questions were presented
+        val questionsList: List<Question>? = intent.getParcelableArrayListExtra("questions")
+        val score = intent.getIntExtra("score", 0)
+        val selectedAnswers = intent.getIntArrayExtra("selectedAnswers")
+        val selectedQuestions = intent.getIntegerArrayListExtra("selectedQuestions")
 
         // Reorder the questions list based on the order they were asked
         val orderedQuestionsList = selectedQuestions?.mapNotNull { index ->
-            questionsList?.getOrNull(index) // Get the question at the given index
-        } ?: emptyList() // If no selection order exists, return an empty list
+            questionsList?.getOrNull(index)
+        } ?: emptyList()
 
-        // Display the final score in the TextView
+        // Display the final score
         tvScore.text = "Score: $score"
 
-        // Loop through the ordered list of questions and display results dynamically
+        // Loop through the ordered questions and display each result
         orderedQuestionsList.forEachIndexed { index, question ->
-            val selectedAnswerIndex = selectedAnswers?.get(index) ?: -1 // Get the user's selected answer index
-            val correctAnswerIndex = question.correctAnswerIndex // Get the correct answer index
+            val selectedAnswerIndex = selectedAnswers?.get(index) ?: -1
+            val correctAnswerIndex = question.correctAnswerIndex
 
-            // Determine if the selected answer was correct or incorrect
-            val answerStatus = if (selectedAnswerIndex == correctAnswerIndex) "✅ Correct" else "❌ Incorrect"
+            // Determine if the user's answer is correct or not
+            val answerStatus =
+                if (selectedAnswerIndex == correctAnswerIndex) "✅ Correct" else "❌ Incorrect"
 
-            // Create a TextView for the question text
+            // Create and configure TextViews for each question, answer, and result status
             val questionTextView = TextView(this).apply {
-                text = "Q${index + 1}: ${question.question}" // Display question number and text
-                textSize = 20f // Set text size
-                setTextColor(resources.getColor(R.color.black, theme)) // Set text color
+                text = "Q${index + 1}: ${question.question}"
+                textSize = 20f
+                setTextColor(resources.getColor(R.color.black, theme))
             }
 
-            // Create a TextView for the user's selected answer
             val selectedAnswerTextView = TextView(this).apply {
-                text = "Your Answer: ${question.options.getOrNull(selectedAnswerIndex - 1) ?: "N/A"}"
-                textSize = 18f // Set text size
-                setTextColor(resources.getColor(R.color.black, theme)) // Set text color
+                text =
+                    "Your Answer: ${question.options.getOrNull(selectedAnswerIndex - 1) ?: "N/A"}"
+                textSize = 18f
+                setTextColor(resources.getColor(R.color.black, theme))
             }
 
-            // Create a TextView for the correct answer
             val correctAnswerTextView = TextView(this).apply {
-                text = "Correct Answer: ${question.options.getOrNull(correctAnswerIndex - 1) ?: "N/A"}"
-                textSize = 18f // Set text size
-                setTextColor(resources.getColor(R.color.garnet, theme)) // Set color to differentiate the correct answer
+                text =
+                    "Correct Answer: ${question.options.getOrNull(correctAnswerIndex - 1) ?: "N/A"}"
+                textSize = 18f
+                setTextColor(resources.getColor(R.color.garnet, theme))
             }
 
-            // Create a TextView to show whether the user got the answer right or wrong
             val statusTextView = TextView(this).apply {
                 text = answerStatus
-                textSize = 18f // Set text size
+                textSize = 18f
                 setTextColor(
                     if (selectedAnswerIndex == correctAnswerIndex)
-                        resources.getColor(R.color.green, theme) // Green for correct
+                        resources.getColor(R.color.green, theme)
                     else
-                        resources.getColor(R.color.red, theme) // Red for incorrect
+                        resources.getColor(R.color.red, theme)
                 )
             }
 
@@ -87,19 +98,19 @@ class ResultsActivity : ComponentActivity() {
             linearResults.addView(correctAnswerTextView)
             linearResults.addView(statusTextView)
 
-            // Add spacing between questions for better readability
+            // Add spacing between each question result
             val space = Space(this).apply {
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    20 // Space height
+                    20
                 )
             }
             linearResults.addView(space)
         }
 
-        // Set up the "OK" button to close the results screen when clicked
+        // Set up the "OK" button to close the results screen
         btnOK.setOnClickListener {
-            finish() // Close this activity and return to the previous screen
+            finish()
         }
     }
 }
