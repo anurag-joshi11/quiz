@@ -22,7 +22,7 @@
 
 1. Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/yourusername/quiz-of-the-day.git
+   https://github.com/anurag-joshi11/quiz.git
 2. Open the project in Android Studio.
 
 3. Make sure you have the required Android SDK and API Level 35.
