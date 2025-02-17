@@ -140,7 +140,7 @@ class QuizActivity : ComponentActivity() {
 
     // Changes the background color dynamically to add variety to each question
     private fun changeBackgroundColor() {
-        val colors = arrayOf("#FF9F80", "#80FF99", "#80A6FF", "#FF80C2", "#FFE066")
+        val colors = arrayOf("#2F63A7", "#AEA052", "#126659", "#783E27", "#540833")
         val newColor = Color.parseColor(colors[questionIndex % colors.size]) // Cycle through colors
         val rootView = findViewById<View>(android.R.id.content) // Get root view
         rootView.setBackgroundColor(newColor) // Apply new background color
